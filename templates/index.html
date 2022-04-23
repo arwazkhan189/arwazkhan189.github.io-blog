@@ -1,0 +1,54 @@
+{% extends 'layout.html' %}
+{% block body%}
+
+<section>
+    <div class="container py-4 my-4 bg-light" style="box-shadow: 5px 5px 5px 5px #777;">
+        {% for data in data%}
+        {% if (loop.index%2!=0) %}
+        
+        <div class="row justify-content-start">
+            <div class="col-md-5" >
+                {%if data['cover_image']%}
+                    <img src="{{data['cover_image']}}" class="img-fluid">
+                {% else %}
+                    <img src="{{url_for('static', filename='images/noImage.png') }}" class="img-fluid">
+                {% endif %}
+            </div>
+
+            <div class="col-md-7 " >
+                <h2>{{data["title"]}}</h2>
+                <h5><b>Published on {{data['readable_publish_date']}}</b></h5>
+                <p class="font-italic">{{data["description"]}}</p>
+                <a class="btn btn-primary" href="{{data['canonical_url']}}" target="_blank" role="button">Read More »</a>
+            </div>
+
+        </div>
+
+        <hr>
+
+        {% else %}
+        <div class="row justify-content-start">
+            <div class="col-md-7" data-aos="fade-left">
+                <h2>{{data["title"]}}</h2>
+                <h5><b>Published on {{data['readable_publish_date']}}</b></h5>
+                <p class="font-italic">{{data["description"]}}</p>
+                <a class="btn btn-primary" href="{{data['canonical_url']}}" target="_blank" role="button">Read More »</a>
+            </div>
+
+            <div class="col-md-5" >
+                {%if data['cover_image']%}
+                    <img src="{{data['cover_image']}}" class="img-fluid">
+                {% else %}
+                    <img src="{{url_for('static', filename='images/noImage.png') }}" class="img-fluid">
+                {% endif %}
+           </div>
+
+        </div>
+        <hr>
+        
+        {% endif %}
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}
